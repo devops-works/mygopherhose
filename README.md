@@ -29,6 +29,13 @@ mygopherhose [-h host] -u user -p [password] [-P port] [-d dbname] [-b bufsize] 
         -p if parameter is empty, password will be asked interactively
 ```
 
+- 🐑 is displayed at each `CREATE TABLE` operation.
+- ⌛ is diplayed when all transactions for the current table have been sent to
+  the buffered channel for processing
+- a dot is displayed for each `INSERT` statement applied (those statements
+  almost always contains several rows, see
+  [`net_buffer_length`](https://dev.mysql.com/doc/refman/5.7/en/mysqldump.html#option_mysqldump_net-buffer-length))
+
 ## GCP benchmarks
 
 - Client VM: n2-standard-2
@@ -42,9 +49,10 @@ mygopherhose [-h host] -u user -p [password] [-P port] [-d dbname] [-b bufsize] 
 
 | description         |   duration | db CPU |
 | ------------------- | ---------: | -----: |
-| mysql cli           | 30m24.209s |   ~11% |
-| mysql + source      |            |        |
-| mygopherhose -c 10  |  13m2.016s | 54-87% |
+| mysql cli piped     | 30m24.209s |   ~11% |
+| mysql -e source     | 30m30.161s |   ~11% |
+| mygopherhose -c 10  | 13m02.016s | 54-87% |
 | mygopherhose -c 20  | 12m51.301s | 60-90% |
 | mygopherhose -c 40  | 12m51.799s | 60-93% |
-| mygopherhose -c 100 |  13m9.446s | 69-97% |
+| mygopherhose -c 100 | 13m09.446s | 69-97% |
+

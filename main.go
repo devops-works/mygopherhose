@@ -10,7 +10,6 @@ import (
 	"strings"
 	"sync"
 	"syscall"
-	"time"
 
 	"golang.org/x/term"
 
@@ -158,13 +157,13 @@ func scan(s bufio.Scanner, db *sql.DB, c chan<- []byte) error {
 		default:
 			// execute the rest (CREATE/DROP TABLE) locally
 			// but wait for query chan to be empty before
-			for {
-				if len(c) == 0 {
-					break
-				}
-				// fmt.Print("<", len(c), ">")
-				time.Sleep(100 * time.Millisecond)
-			}
+			// for {
+			// 	if len(c) == 0 {
+			// 		break
+			// 	}
+			// 	// fmt.Print("<", len(c), ">")
+			// 	time.Sleep(100 * time.Millisecond)
+			// }
 
 			cmd := strings.Split(string(accum), " ")
 

@@ -105,10 +105,10 @@ func main() {
 }
 
 func usage() {
-	fmt.Printf("%s [-h host] -u user -p [password] [-P port] [-d dbname] [-b bufsize]\n", os.Args[0])
+	fmt.Printf("%s [-h host] -u user -p [password] [-P port] [-d dbname] [-b bufsize] dumpfile\n", os.Args[0])
 	fmt.Printf("\t-h defaults to 127.0.0.1\n\t-P defaults to 3306\n\t-b defaults to %d bytes\n", 10*1024*1024)
 	fmt.Printf("\t-d can be omitted is dump contains `use database;` stanza\n")
-	fmt.Printf("\t-p parameter is empty, password will be asked interactively\n")
+	fmt.Printf("\t-p if parameter is empty, password will be asked interactively\n")
 }
 
 func worker(wg *sync.WaitGroup, db *sql.DB, c <-chan []byte) {

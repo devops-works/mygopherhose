@@ -18,6 +18,13 @@ import (
 
 const BUFSIZE = 10 * 1024 * 1024
 
+var (
+	// Version of current binary
+	Version string
+	// BuildDate of current binary
+	BuildDate string
+)
+
 func main() {
 	var (
 		wg                               sync.WaitGroup
@@ -104,6 +111,7 @@ func main() {
 }
 
 func usage() {
+	fmt.Printf("mygopherhose version %s (built %s)\n\n", Version, BuildDate)
 	fmt.Printf("%s [-h host] -u user -p [password] [-P port] [-d dbname] [-b bufsize] dumpfile\n", os.Args[0])
 	fmt.Printf("\t-h defaults to 127.0.0.1\n\t-P defaults to 3306\n\t-b defaults to %d bytes\n", 10*1024*1024)
 	fmt.Printf("\t-d can be omitted is dump contains `use database;` stanza\n")
